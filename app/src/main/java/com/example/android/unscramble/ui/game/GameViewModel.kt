@@ -4,10 +4,78 @@ import androidx.lifecycle.ViewModel
 
 class GameViewModel: ViewModel() {
 
-    private var score = 0
-    private var currentWordCount = 0
-    private var _currentScrambledWord = "test"
+    // SCORE GAME
+    private var _score = 0
+    val score: Int get() = _score
+
+    // NOMBRE DE MOTS
+    private var _currentWordCount = 0
+    val currentWordCount: Int
+        get() = _currentWordCount
+
+    private lateinit var _currentScrambledWord : String
     val currentScrambledWord: String
         get() = _currentScrambledWord
 
+    // liste de mots
+    private var wordsList =  mutableListOf<String>()
+    // mots a dechiffrer
+    private lateinit var currentWord: String
+
+    private fun getNextWord() {
+        currentWord = allWordsList.random()
+        val tempWord = currentWord.toCharArray()
+        tempWord.shuffle()
+
+        // continue de shuffle tant que tempWord = currentWord
+        while(String(tempWord).equals(currentWord, false)) {
+            tempWord.shuffle()
+        }
+
+        // pour vérifier si un mot a déjà été utilisé
+        if (wordsList.contains(currentWord)) getNextWord()
+        else {
+            _currentScrambledWord = String(tempWord)
+            ++_currentWordCount
+            wordsList.add(currentWord)
+        }
+    }
+
+    /*
+     * Returns true if the current word count is less than MAX_NO_OF_WORDS.
+     * Updates the next word.
+     */
+    fun nextWord(): Boolean {
+        return if (currentWordCount < MAX_NO_OF_WORDS) {
+            getNextWord()
+            true
+        } else false
+    }
+
+    //méthode d'assistance pour valider le mot du joueur
+    private fun increaseScore() {
+        _score += SCORE_INCREASE
+    }
+
+    fun isUserWordCorrect(playerWord: String): Boolean {
+        if (playerWord.equals(currentWord, true)) {
+            increaseScore()
+            return true
+        }
+        return false
+    }
+
+    /*
+* Re-initializes the game data to restart the game.
+*/
+    fun reinitializeData() {
+        _score = 0
+        _currentWordCount = 0
+        wordsList.clear()
+        getNextWord()
+    }
+
+    init {
+        getNextWord()
+    }
 }

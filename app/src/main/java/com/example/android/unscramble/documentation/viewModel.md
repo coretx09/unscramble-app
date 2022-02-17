@@ -30,3 +30,14 @@ Permet de renvoyer quelque chose d'un getter autre que l'objet exact.
 
 N'exposez jamais les champs de données modifiables de votre ViewModel— assurez-vous que ces données
 ne peuvent pas être modifiées à partir d'une autre classe. Les données modifiables à l'intérieur de ViewModel doivent toujours être private.
+
+# The lifecycle of a ViewModel:
+Le framework  maintient le ViewModel vivant tant que la portée de l'activité ou du fragment est vivante.
+ViewModel n'est pas détruit si son propriétaire est détruit pour un changement de configuration
+
+# Late initialization (latenit) - Initialisation tardive:
+Généralement, lorsque vous déclarez une variable, vous lui fournissez une valeur initiale à l'avance.
+Cependant, si vous n'êtes pas encore prêt à attribuer une valeur, vous pouvez l'initialiser plus tard.
+La mémoire n'est pas allouée à la variable tant qu'elle n'est pas initialisée. 
+Si vous essayez d'accéder à la variable avant de l'avoir initialisée, l'application plantera.
+
