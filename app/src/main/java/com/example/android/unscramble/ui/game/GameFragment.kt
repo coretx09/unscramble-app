@@ -133,7 +133,6 @@ class GameFragment : Fragment() {
     }
 
 
-
     /*
      * Creates and shows an AlertDialog with the final score.
      */
