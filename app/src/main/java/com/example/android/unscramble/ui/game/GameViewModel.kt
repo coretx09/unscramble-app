@@ -24,6 +24,7 @@ class GameViewModel: ViewModel() {
     // MOTS BROUILLE ACTUEL
     private  val _currentScrambledWord = MutableLiveData<String>()
     val currentScrambledWord: LiveData<Spannable> = Transformations.map(_currentScrambledWord) {
+        // TALKBACK
         if (it == null) {
             SpannableString("")
         } else {

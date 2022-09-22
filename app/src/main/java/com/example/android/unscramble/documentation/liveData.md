@@ -2,9 +2,11 @@
 La [LiveData] classe fait également partie des composants d'architecture Android et est une classe de support de données qui peut être observée.
 LiveData est une classe de détenteurs de données observables qui tient compte du lifeCycle.
 
+[observability] fait référence à la capacité d'un objet à informer les autres des modifications de ses données
+
 [LiveData] contient des données ; LiveData est un wrapper qui peut être utilisé avec n'importe quel type de données.
 
-[LiveData] est observable, ce qui signifie qu'un observateur est averti lorsque les données détenues par l' LiveData objet changent.
+[LiveData] est observable,  ce qui signifie que lorsque les données changent, l'interface utilisateur sera automatiquement mise à jour.
 
 [LiveData] est conscient du lifecycle. Lorsque vous attachez un observateur au LiveData,
 l' [observer] est associé à un [LifecycleOwner](généralement une activité ou un fragment). 
